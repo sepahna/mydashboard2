@@ -25,6 +25,12 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          # Do not install obsolete package "tools" (removed from Google SDK repos).
+          packages: platform-tools
+
+      - name: Accept Android licenses
+        run: yes | sdkmanager --licenses >/dev/null || true
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
